@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+instance/
+contest_data.xlsx
+.env
+.vscode/
+.idea/
+*.log
+*.sqlite
