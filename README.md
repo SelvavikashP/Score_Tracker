@@ -40,3 +40,19 @@ A web application to track and monitor competitive programming rankings and scor
 ## Troubleshooting
 - **Invalid Profile URL**: Ensure the URL matches the expected format (e.g., `https://codeforces.com/profile/handle`).
 - **Excel Busy**: Close the `contest_data.xlsx` file if it's open in another application before registering new users or downloading.
+## Live Output Preview
+
+Below is a representation of how the dashboard looks when tracking top competitive programmers.
+
+| #Rank | User | Platform | Rating / Rank | Problems Solved | Total Contests |
+| :---: | :--- | :--- | :--- | :---: | :---: |
+| #1 | **Gennady Korotkevich** | `Codeforces` | **3592** (LGM) | 670 | 297 |
+| #2 | **tourist** | `AtCoder` | **3782** | 450 | 139 |
+| #3 | **sids** | `LeetCode` | **2200** (Guardian) | 1240 | 45 |
+| #4 | **vjudge_user** | `CodeChef` | **2450** (6★) | 320 | 88 |
+
+> [!TIP]
+> Information is updated in real-time across all platforms. The "Problems Solved" column tracks unique problems solved, and "Global Ranking" shows the user's standing in the last contest or historically.
+
+---
+© 2024 Global Score Tracker. All rights reserved.
