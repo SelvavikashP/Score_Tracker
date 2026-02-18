@@ -14,6 +14,10 @@ app.config['SECRET_KEY'] = 'your-secret-key' # Change in production
 db.init_app(app)
 scheduler = APScheduler()
 
+# Ensure DB tables exist when app is imported (works with gunicorn on Render)
+with app.app_context():
+    db.create_all()
+
 def update_all_users():
     with app.app_context():
         users = User.query.all()
@@ -120,18 +124,7 @@ def download():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    with app.app_context():
-        # Handle schema changes for existing DB (simplified for this project)
-        # In a real app we'd use Flask-Migrate, here we'll just drop/recreate if needed or just create_all
-        # Since we added columns, create_all won't update existing tables.
-        # For this task, I'll clear the DB to ensure new schema is applied.
-        if os.path.exists('instance/database.db'):
-             # Optional: backup or migration. For now let's just create new.
-             pass
-        db.create_all()
-    
-    # Setup scheduler
+    # Setup scheduler only when running locally (not under gunicorn)
     scheduler.add_job(id='daily_update', func=update_all_users, trigger='interval', days=1)
     scheduler.start()
-    
     app.run(debug=True)
