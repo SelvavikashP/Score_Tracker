@@ -8,11 +8,15 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-# Use absolute path for DB so it works on Render and locally
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-DB_DIR = os.path.join(BASE_DIR, 'instance')
-os.makedirs(DB_DIR, exist_ok=True)
-DB_PATH = os.path.join(DB_DIR, 'database.db')
+# Use /tmp for DB on Render (read-only filesystem elsewhere)
+if os.environ.get('RENDER'):
+    DB_PATH = '/tmp/database.db'
+else:
+    # Use instance folder locally
+    BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+    DB_DIR = os.path.join(BASE_DIR, 'instance')
+    os.makedirs(DB_DIR, exist_ok=True)
+    DB_PATH = os.path.join(DB_DIR, 'database.db')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_PATH}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

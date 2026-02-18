@@ -2,7 +2,10 @@ import pandas as pd
 import os
 from datetime import datetime
 
-EXCEL_FILE = "contest_data.xlsx"
+if os.environ.get('RENDER'):
+    EXCEL_FILE = "/tmp/contest_data.xlsx"
+else:
+    EXCEL_FILE = "contest_data.xlsx"
 
 def update_excel(users):
     """
